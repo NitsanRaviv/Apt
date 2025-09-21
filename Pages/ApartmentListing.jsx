@@ -56,12 +56,12 @@ export default function ApartmentListing() {
   ];
 
   const nearbyPlaces = [
+    { name: "פארק גדול שכונתי", distance: "1 דק׳ הליכה", icon: "🏞️" },
     { name: "פארק מרכזי", distance: "4 דק׳ הליכה", icon: "🌳" },
-    { name: "תחנת אוטובוס", distance: "2 דק׳", icon: "🚌" },
-    { name: "פארק נוסף", distance: "8 דק׳ הליכה", icon: "🏞️" },
-    { name: "בית כנסת", distance: "5 דק׳ הליכה", icon: "🕍" },
-    { name: "בתי ספר וגני ילדים", distance: "5–10 דק׳", icon: "🏫" },
-    { name: "מרכז מסחרי ובתי קפה", distance: "7 דק׳", icon: "☕" },
+    { name: "תחנת אוטובוס", distance: "3 דק׳ הליכה", icon: "🚌" },
+    { name: "בית כנסת", distance: "2 דק׳ הליכה", icon: "🕍" },
+    { name: "בתי ספר וגני ילדים", distance: "2-5 דק׳ הליכה", icon: "🏫" },
+    { name: "מרכז מסחרי ובתי קפה", distance: "7 דק׳ הליכה", icon: "☕" },
     { name: "עגלת קפה", distance: "6 דק׳ הליכה", icon: "🥤" },
   ];
 
@@ -264,16 +264,16 @@ export default function ApartmentListing() {
           </div>
           
           {/* Alternative Contact Methods */}
-          <div className="flex flex-col sm:flex-row justify-center gap-4 mt-12">
-            <Button variant="outline" size="lg" className="flex-1 max-w-xs">
+          <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mt-12">
+            <Button variant="outline" size="lg" className="max-w-xs w-auto sm:flex-1">
               <Phone className="w-5 h-5 ml-2" />
               התקשרו עכשיו
             </Button>
-            <Button variant="outline" size="lg" className="flex-1 max-w-xs bg-green-50 border-green-200 text-green-700 hover:bg-green-100">
+            <Button variant="outline" size="lg" className="max-w-xs w-auto sm:flex-1 bg-green-50 border-green-200 text-green-700 hover:bg-green-100">
               <MessageCircle className="w-5 h-5 ml-2" />
               ווטסאפ
             </Button>
-            <Button variant="outline" size="lg" className="flex-1 max-w-xs">
+            <Button variant="outline" size="lg" className="max-w-xs w-auto sm:flex-1">
               <Mail className="w-5 h-5 ml-2" />
               אימייל
             </Button>
