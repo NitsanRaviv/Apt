@@ -7,6 +7,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import mainImage from "../Images/mainImg.png";
+import planImage from "../Images/planImg.png";
 
 
 
@@ -38,12 +39,12 @@ export default function ApartmentListing() {
   };
 
   const quickFacts = [
-    { icon: "🏠", text: "חדרים: 4.5" },
-    { icon: "🏢", text: "קומה: 3/6 עם מעלית" },
-    { icon: "📐", text: "שטח: 112 מ״ר" },
+    { icon: "🏠", text: "5 חדרים" },
+    { icon: "🏢", text: "קומה: 4/8 עם מעלית" },
+    { icon: "📐", text: "שטח: 146 מ״ר" },
     { icon: "🌅", text: "מרפסת: 12 מ״ר" },
-    { icon: "🚗", text: "חניה: צמודה" },
-    { icon: "📦", text: "מחסן: כן" }
+    { icon: "🚗", text: "2 חניות בטאבו" },
+    { icon: "📦", text: "מחסן: 8 מ״ר" }
   ];
 
   const highlights = [
@@ -105,8 +106,8 @@ export default function ApartmentListing() {
             {/* Quick Facts */}
             <div className="flex flex-wrap justify-center gap-3 mt-8">
               {quickFacts.map((fact, index) => (
-                <Badge key={index} className="bg-white/10 backdrop-blur-md text-white border-white/20 text-base px-4 py-2">
-                  <span className="mr-2">{fact.icon}</span>
+                <Badge key={index} className="bg-white/10 backdrop-blur-md text-white border-white/20 text-base px-4 py-2 inline-flex items-center justify-center gap-2">
+                  <span className="leading-none">{fact.icon}</span>
                   {fact.text}
                 </Badge>
               ))}
@@ -191,7 +192,6 @@ export default function ApartmentListing() {
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-6">גלריית תמונות</h2>
             <div className="w-24 h-1 bg-blue-600 mx-auto mb-8"></div>
-            <p className="text-slate-600 text-lg">תמונות זמניות — יוחלפו בתמונות אמתיות</p>
           </div>
           <ImageGallery />
         </div>
@@ -205,7 +205,7 @@ export default function ApartmentListing() {
           
           <div className="max-w-4xl mx-auto">
             <img
-              src="https://images.unsplash.com/photo-1518005020951-eccb494ad742?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+              src={planImage.src}
               alt="שרטוט הדירה להמחשה"
               className="w-full rounded-2xl shadow-2xl mb-8"
             />
@@ -235,23 +235,6 @@ export default function ApartmentListing() {
           </div>
 
           <NeighborhoodMap />
-
-          {/* Commute Information */}
-          <div className="grid md:grid-cols-2 gap-8 mt-16">
-            <Card className="p-8 text-center">
-              <h3 className="text-xl font-bold text-slate-900 mb-4">זמני נסיעה</h3>
-              <div className="space-y-3">
-                <div className="flex justify-between items-center">
-                  <span>תל אביב</span>
-                  <Badge>~20 דק׳ ברכב</Badge>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span>רכבת/תחנת BRT</span>
-                  <Badge>~10 דק׳</Badge>
-                </div>
-              </div>
-            </Card>
-          </div>
         </div>
       </section>
 
@@ -295,10 +278,6 @@ export default function ApartmentListing() {
               אימייל
             </Button>
           </div>
-          
-          <p className="text-center text-slate-600 text-sm mt-8">
-            פרטיותכם חשובה לנו — נעשה שימוש בפרטים לצורך חזרה בלבד.
-          </p>
         </div>
       </section>
 
@@ -325,9 +304,6 @@ export default function ApartmentListing() {
                 </Button>
               </div>
             </div>
-          </div>
-          <div className="border-t border-slate-700 mt-8 pt-8 text-center text-slate-400 text-sm">
-            <p>© 2024 כל הזכויות שמורות | מדיניות פרטיות</p>
           </div>
         </div>
       </footer>

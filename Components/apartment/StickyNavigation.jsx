@@ -47,11 +47,6 @@ export default function StickyNavigation() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          {/* Logo/Title */}
-          <div className="font-bold text-xl text-slate-900">
-            דירה למכירה
-          </div>
-
           {/* Desktop Navigation */}
           <div className="hidden md:flex space-x-reverse space-x-8">
             {navigationItems.map((item) => (
