@@ -96,11 +96,11 @@ export default function ApartmentListing() {
             </div>
 
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold leading-tight">
-              דירה מרווחת למכירה ב[שם השכונה], [עיר] — משופצת ומוארת
+            ✨ דירת 5 חדרים גדולה בפסגות אפק, ראש העין — 146 מ"ר. מרפסת עם נוף לשקיעות ✨ 
             </h1>
             
             <h2 className="text-xl md:text-2xl lg:text-3xl text-slate-200 max-w-4xl mx-auto leading-relaxed">
-              מיקום מצוין, בניין מטופח, ומרפסת שמש לנוף פסטורלי.
+              מיקום מצוין, בניין מטופח, ומרפסת לכיוון השקיעה
             </h2>
 
             {/* Quick Facts */}
