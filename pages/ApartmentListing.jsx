@@ -11,10 +11,10 @@ import planImage from "../Images/planImg.png";
 
 
 
-import StickyNavigation from "../Components/apartment/StickyNavigation";
-import ImageGallery from "../Components/apartment/ImageGallery";
-import FAQSection from "../Components/apartment/FAQSection";
-import NeighborhoodMap from "../Components/apartment/NeighborhoodMap";
+import StickyNavigation from "../components/apartment/StickyNavigation";
+import ImageGallery from "../components/apartment/ImageGallery";
+import FAQSection from "../components/apartment/FAQSection";
+import NeighborhoodMap from "../components/apartment/NeighborhoodMap";
 
 export default function ApartmentListing() {
   const [scrollProgress, setScrollProgress] = useState(0);

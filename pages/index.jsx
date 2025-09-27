@@ -1,5 +1,5 @@
 import React from 'react'
-import ApartmentListing from '../Pages/ApartmentListing'
+import ApartmentListing from './ApartmentListing'
 
 export default function HomePage() {
   return <ApartmentListing />
