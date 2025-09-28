@@ -49,20 +49,21 @@ export default function ApartmentListing() {
 
   const highlights = [
     "תכנון חלוקה פונקציונלי עם סלון רחב ומטבח פתוח",
-    "חדר שינה הורים עם ארון קיר ואמבטיה בסוויטה", 
+    "שלושה חדרי שירותים ושני חדרי רחצה",
+    "חדר שינה הורים עם מקלחת ושירותים", 
     "מרפסת שמש שפונה לדרום-מערב",
     "מערכות מיזוג ותאורה חדשות",
     "בניין עם מעלית ולובי מטופח"
   ];
 
   const nearbyPlaces = [
-    { name: "פארק גדול שכונתי", distance: "1 דק׳ הליכה", icon: "🏞️" },
-    { name: "פארק מרכזי", distance: "4 דק׳ הליכה", icon: "🌳" },
-    { name: "תחנת אוטובוס", distance: "3 דק׳ הליכה", icon: "🚌" },
-    { name: "בית כנסת", distance: "2 דק׳ הליכה", icon: "🕍" },
-    { name: "בתי ספר וגני ילדים", distance: "2-5 דק׳ הליכה", icon: "🏫" },
-    { name: "מרכז מסחרי ובתי קפה", distance: "7 דק׳ הליכה", icon: "☕" },
-    { name: "עגלת קפה", distance: "6 דק׳ הליכה", icon: "🥤" },
+    { name: "פארק הגבעה / כספיון", distance: "0 דק׳ הליכה", icon: "🏞️" },
+    { name: "פארק המרכזי", distance: "2 דק׳ הליכה", icon: "🌳" },
+    { name: "תחנת אוטובוס", distance: "2 דק׳ הליכה", icon: "🚌" },
+    { name: "בית כנסת שבטי ישראל", distance: "2 דק׳ הליכה", icon: "🕍" },
+    { name: "בית ספר תגלית וגני ילדים", distance: "1 דק׳ הליכה", icon: "🏫" },
+    { name: "מרכז מסחרי צים  אורבן (בהקמה)", distance: "9 דק׳ הליכה", icon: "🛍️" },
+    { name: "עגלת קפה שורשים", distance: "8 דק׳ הליכה", icon: "☕" },
   ];
 
   return (
@@ -96,11 +97,11 @@ export default function ApartmentListing() {
             </div>
 
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold leading-tight">
-            ✨ דירת 5 חדרים גדולה בפסגות אפק, ראש העין — 146 מ"ר. מרפסת עם נוף לשקיעות ✨ 
+            ✨ בית שבו הנפש מוצאת מנוחה (ללא תיווך) ✨ 
             </h1>
             
             <h2 className="text-xl md:text-2xl lg:text-3xl text-slate-200 max-w-4xl mx-auto leading-relaxed">
-              מיקום מצוין, בניין מטופח, ומרפסת לכיוון השקיעה
+              מיקום מצוין, בניין מטופח, ומרפסת עם נוף לשקיעות שמכניסות שלווה ואוויר לריאות
             </h2>
 
             {/* Quick Facts */}
@@ -117,17 +118,11 @@ export default function ApartmentListing() {
             <div className="flex flex-col sm:flex-row justify-center gap-4 mt-12">
               <Button 
                 size="lg" 
-                className="bg-green-500 hover:bg-green-600 text-white font-semibold text-lg px-8 py-4 rounded-xl shadow-2xl transition-all duration-300 transform hover:scale-105"
-              >
-                קבעו סיור בדירה
-              </Button>
-              <Button 
-                size="lg" 
                 variant="outline" 
                 className="border-2 border-white text-white hover:bg-white hover:text-slate-900 font-semibold text-lg px-8 py-4 rounded-xl backdrop-blur-md transition-all duration-300"
               >
                 <Phone className="w-5 h-5 ml-2" />
-                שיחת טלפון מיידית
+                שיחת טלפון 
               </Button>
               <Button 
                 size="lg" 
@@ -152,9 +147,7 @@ export default function ApartmentListing() {
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div className="space-y-8">
               <p className="text-xl text-slate-600 leading-relaxed">
-                הדירה נמצאת ברחוב שקט בלב [שם השכונה], במרחק הליכה מקווי תחבורה, פארקים, ובתי קפה. 
-                שופצה בשנים האחרונות עם דגש על זרימת אור טבעי וניצול חכם של החלל.
-              </p>
+              דירת 5 חדרים מרווחת, בתכנון חכם ונוח למשפחות. סלון גדול עם יציאה ישירה למרפסת שמש הפונה לנוף פתוח, מטבח עם שטח עבודה ואחסון רחב. לדירה חללים מתוכננים היטב שמאפשרים זרימת אוויר ואור טבעי בזכות כיווני דרום־מערב. שילוב מושלם של פרקטיות יומיומית עם תחושת מרחב ונוחות.              </p>
 
               <div className="space-y-4">
                 {highlights.map((highlight, index) => (
@@ -170,7 +163,7 @@ export default function ApartmentListing() {
               {/* Pricing with Anchoring */}
               <Card className="p-8 bg-slate-50 border-2 border-slate-200">
                 <div className="text-center space-y-4">
-                  <h3 className="text-3xl font-bold text-slate-900">מחיר מבוקש: ₪2,850,000</h3>
+                  <h3 className="text-3xl font-bold text-slate-900">מחיר מבוקש: ₪2,700,000</h3>
                 </div>
               </Card>
             </div>
@@ -220,8 +213,8 @@ export default function ApartmentListing() {
             <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-6">השכונה והסביבה</h2>
             <div className="w-24 h-1 bg-blue-600 mx-auto mb-8"></div>
             <p className="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
-              שכונת [שם השכונה] מציעה שילוב מושלם של שקט עירוני ונגישות מהירה לכל מה שחשוב.
-            </p>
+            שכונת הנביאים, מציעה שילוב מושלם של שקט עירוני עם נגישות מלאה לכל מה שחשוב. בשכונה מתוכננות ומיושמות טיילות ברחבי הפארקים שמאפשרות גישה מהירה לקניון העתידי, קרית החינוך, עגלת הקפה וכל מה שמעניין בעיר.
+            הבנייה הנמוכה מעניקה נוף פתוח, והפארקים הרבים בשכונה הופכים אותה לאטרקטיבית במיוחד עבור משפחות צעירות עם ילדים.            </p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
@@ -288,7 +281,7 @@ export default function ApartmentListing() {
             <div>
               <h3 className="font-bold text-xl mb-4">פרטי יצירת קשר</h3>
               <p className="text-slate-300">אליהו הנביא 46, ראש העין</p>
-              <p className="text-slate-300">טלפון: 052-123-4567</p>
+              <p className="text-slate-300">טלפון: 0506920046</p>
             </div>
             <div>
               <h3 className="font-bold text-xl mb-4">שתפו</h3>
