@@ -8,8 +8,9 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import mainImage from "../Images/mainImg.png";
 import planImage from "../Images/planImg.png";
-
-
+import tabaAImage from "../Images/taba1.png";
+import tabaBImage from "../Images/taba2.png";
+import masterImage from "../Images/masterImg.png";
 
 import StickyNavigation from "../components/apartment/StickyNavigation";
 import ImageGallery from "../components/apartment/ImageGallery";
@@ -58,7 +59,7 @@ export default function ApartmentListing() {
 
   const nearbyPlaces = [
     { name: "פארק הגבעה / כספיון", distance: "0 דק׳ הליכה", icon: "🏞️" },
-    { name: "פארק המרכזי", distance: "2 דק׳ הליכה", icon: "🌳" },
+    { name: "הפארק המרכזי", distance: "2 דק׳ הליכה", icon: "🌳" },
     { name: "תחנת אוטובוס", distance: "2 דק׳ הליכה", icon: "🚌" },
     { name: "בית כנסת שבטי ישראל", distance: "2 דק׳ הליכה", icon: "🕍" },
     { name: "בית ספר תגלית וגני ילדים", distance: "1 דק׳ הליכה", icon: "🏫" },
@@ -170,8 +171,8 @@ export default function ApartmentListing() {
 
             <div className="lg:order-first">
               <img
-                src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1053&q=80"
-                alt="תמונה לדוגמה — פינת ישיבה בסלון"
+                src={masterImage.src}
+                alt="פינת ישיבה בסלון"
                 className="w-full h-96 object-cover rounded-2xl shadow-2xl"
               />
             </div>
@@ -199,7 +200,30 @@ export default function ApartmentListing() {
           <div className="max-w-4xl mx-auto">
             <img
               src={planImage.src}
-              alt="שרטוט הדירה להמחשה"
+              alt="שרטוט"
+              className="w-full rounded-2xl shadow-2xl mb-8"
+            />
+          </div>
+        </div>
+      </section>
+
+            {/* Floor Plan 2 */}
+            <section id="floorplan2" className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-6">תב״ע</h2>
+          <div className="w-24 h-1 bg-blue-600 mx-auto mb-12"></div>
+          
+          <div className="max-w-4xl mx-auto">
+            <img
+              src={tabaAImage.src}
+              alt="שרטוט"
+              className="w-full rounded-2xl shadow-2xl mb-8"
+            />
+          </div>
+          <div className="max-w-4xl mx-auto">
+            <img
+              src={tabaBImage.src}
+              alt="שרטוט"
               className="w-full rounded-2xl shadow-2xl mb-8"
             />
           </div>

@@ -7,50 +7,79 @@ import {
   DialogContent,
 } from "@/components/ui/dialog";
 
+import salonAImage from "../../Images/salon1.png";
+import salonBImage from "../../Images/salon2.png";
+import salonCImage from "../../Images/salon3.png";
+import salonDImage from "../../Images/salon4.png";
+import salonEImage from "../../Images/salon5.png";
+import salonFImage from "../../Images/salon6.png";
+import kitAImage from "../../Images/kit1.png";
+import kitBImage from "../../Images/kit2.png";
+import kitCImage from "../../Images/kit3.png";
+import balconyImage from "../../Images/balcony.png";
+import roomAImage from "../../Images/room1.png";
+import shellImage from "../../Images/shell.png";
+import sunsetImage from "../../Images/sunset.png";
+import toiletAImage from "../../Images/toilet1.png";
+import wallImage from "../../Images/wall.png";
+
 export default function ImageGallery() {
   const [selectedImage, setSelectedImage] = useState(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   const galleryImages = [
     {
-      url: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      alt: "תמונה לדוגמה — הסלון",
-      title: "הסלון"
+      url: salonAImage.src,
+      title: "סלון"
     },
     {
-      url: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      alt: "תמונה לדוגמה — המטבח",
-      title: "המטבח"
+      url: salonBImage.src,
+      title: "סלון"
     },
     {
-      url: "https://images.unsplash.com/photo-1616594039964-ae9021a400a0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      alt: "תמונה לדוגמה — חדר השינה הראשי",
-      title: "חדר השינה הראשי"
+      url: salonFImage.src,
+      title: "סלון"
     },
     {
-      url: "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      alt: "תמונה לדוגמה — המרפסת",
-      title: "המרפסת"
+      url: salonEImage.src,
+      title: "פינת אוכל"
     },
     {
-      url: "https://images.unsplash.com/photo-1604709177225-055f99402ea3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      alt: "תמונה לדוגמה — חדר רחצה",
-      title: "חדר רחצה"
+      url: kitBImage.src,
+      title: "מטבח"
     },
     {
-      url: "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      alt: "תמונה לדוגמה — חדר ילדים",
+      url: kitCImage.src,
+      title: "מטבח"
+    },
+    {
+      url: roomAImage.src,
       title: "חדר ילדים"
     },
     {
-      url: "https://images.unsplash.com/photo-1600210492493-0946911123ea?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      alt: "תמונה לדוגמה — כניסה לבניין",
-      title: "כניסה לבניין"
+      url: toiletAImage.src,
+      title: "אמבטיה"
     },
     {
-      url: "https://images.unsplash.com/photo-1600607687644-c7171b42498b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      alt: "תמונה לדוגמה — פינת עבודה",
-      title: "פינת עבודה"
+      url: salonDImage.src,
+      title: "סלון"
+    },
+    {
+      url: balconyImage.src,
+      title: "מרפסת"
+    },
+    {
+      url: sunsetImage.src,
+      title: "שקיעה"
+    },
+    {
+      url: shellImage.src,
+      title: "שקיעה"
+    },
+
+    {
+      url: wallImage.src,
+      title: "שקיעה"
     }
   ];
 

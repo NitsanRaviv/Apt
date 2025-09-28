@@ -11,6 +11,7 @@ export default function StickyNavigation() {
     { id: "details", label: "פרטי הדירה" },
     { id: "gallery", label: "גלריית תמונות" },
     { id: "floorplan", label: "שרטוט הדירה" },
+    { id: "floorplan2", label: "תב״ע" },
     { id: "neighborhood", label: "השכונה והסביבה" },
     { id: "faq", label: "שאלות נפוצות" },
     { id: "contact", label: "יצירת קשר" }
