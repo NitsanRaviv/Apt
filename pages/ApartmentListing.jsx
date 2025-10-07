@@ -98,7 +98,7 @@ export default function ApartmentListing() {
             </div>
 
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold leading-tight">
-            ✨ בית שבו הנפש מוצאת מנוחה (ללא תיווך) ✨ 
+            ✨ בית שבו הנפש מוצאת מנוחה - למכירה ללא תיווך ✨ 
             </h1>
             
             <h2 className="text-xl md:text-2xl lg:text-3xl text-slate-200 max-w-4xl mx-auto leading-relaxed">
@@ -121,6 +121,7 @@ export default function ApartmentListing() {
                 size="lg" 
                 variant="outline" 
                 className="border-2 border-white text-white hover:bg-white hover:text-slate-900 font-semibold text-lg px-8 py-4 rounded-xl backdrop-blur-md transition-all duration-300"
+                onClick={() => { window.location.href = 'tel:0506920046'; }}
               >
                 <Phone className="w-5 h-5 ml-2" />
                 שיחת טלפון 
@@ -128,6 +129,7 @@ export default function ApartmentListing() {
               <Button 
                 size="lg" 
                 className="bg-green-600 hover:bg-green-700 text-white font-semibold text-lg px-8 py-4 rounded-xl shadow-2xl transition-all duration-300"
+                onClick={() => { window.open('https://wa.me/972506920046', '_blank'); }}
               >
                 <MessageCircle className="w-5 h-5 ml-2" />
                 ווטסאפ
@@ -282,17 +284,13 @@ export default function ApartmentListing() {
           
           {/* Alternative Contact Methods */}
           <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mt-12">
-            <Button variant="outline" size="lg" className="max-w-xs w-auto sm:flex-1">
+            <Button variant="outline" size="lg" className="max-w-xs w-auto sm:flex-1" onClick={() => { window.location.href = 'tel:0506920046'; }}>
               <Phone className="w-5 h-5 ml-2" />
               התקשרו עכשיו
             </Button>
-            <Button variant="outline" size="lg" className="max-w-xs w-auto sm:flex-1 bg-green-50 border-green-200 text-green-700 hover:bg-green-100">
+            <Button variant="outline" size="lg" className="max-w-xs w-auto sm:flex-1 bg-green-50 border-green-200 text-green-700 hover:bg-green-100" onClick={() => { window.open('https://wa.me/972506920046', '_blank'); }}>
               <MessageCircle className="w-5 h-5 ml-2" />
               ווטסאפ
-            </Button>
-            <Button variant="outline" size="lg" className="max-w-xs w-auto sm:flex-1">
-              <Mail className="w-5 h-5 ml-2" />
-              אימייל
             </Button>
           </div>
         </div>
@@ -310,13 +308,25 @@ export default function ApartmentListing() {
             <div>
               <h3 className="font-bold text-xl mb-4">שתפו</h3>
               <div className="flex justify-center md:justify-start gap-4">
-                <Button variant="ghost" size="sm" className="text-white hover:bg-slate-800">
+                <Button variant="ghost" size="sm" className="text-white hover:bg-slate-800"onClick={() => { const text = "היי, מוזמנים לצפות בדירה למכירה שמצאתי בראש העין www.sunsetview.site"; window.open('https://wa.me/?text=' + encodeURIComponent(text), '_blank'); }}>
                   <MessageCircle className="w-5 h-5" />
                 </Button>
-                <Button variant="ghost" size="sm" className="text-white hover:bg-slate-800">
-                  <Mail className="w-5 h-5" />
-                </Button>
-                <Button variant="ghost" size="sm" className="text-white hover:bg-slate-800">
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="text-white hover:bg-slate-800"
+                  onClick={() => {
+                    const shareUrl = 'https://www.sunsetview.site';
+                    const shareData = { title: 'דירה למכירה בראש העין', url: shareUrl };
+                    if (typeof window !== 'undefined' && navigator.share) {
+                      navigator.share(shareData).catch(() => {});
+                    } else if (typeof window !== 'undefined' && navigator.clipboard && navigator.clipboard.writeText) {
+                      navigator.clipboard.writeText(shareUrl).then(() => alert('הקישור הועתק ללוח')).catch(() => window.open(shareUrl, '_blank'));
+                    } else {
+                      window.open(shareUrl, '_blank');
+                    }
+                  }}
+                >
                   <Share2 className="w-5 h-5" />
                 </Button>
               </div>
