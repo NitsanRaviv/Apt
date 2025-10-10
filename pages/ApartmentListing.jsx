@@ -252,8 +252,6 @@ export default function ApartmentListing() {
               </Card>
             ))}
           </div>
-
-          <NeighborhoodMap />
         </div>
       </section>
 
