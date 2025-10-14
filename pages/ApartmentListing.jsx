@@ -41,24 +41,55 @@ export default function ApartmentListing() {
 
   const INITIAL_INTERESTED = 1;
   const INTERESTED_KEY = 'interestedCount_v2';
+  const COUNTER_API = 'https://script.google.com/macros/s/AKfycbxS87Zo9gVLNYKaFw0N9QyyaJKf5aQ8Xn1StCQKMB4Z47UKj1oxn0imQN6N54xpPvQz/exec';
   const [interestedCount, setInterestedCount] = useState(INITIAL_INTERESTED);
 
   useEffect(() => {
-    try {
-      // reset by using a new versioned key
-      const saved = localStorage.getItem(INTERESTED_KEY);
-      if (saved !== null) {
-        const parsed = parseInt(saved, 10);
-        if (!Number.isNaN(parsed)) setInterestedCount(parsed);
-      } else {
-        localStorage.setItem(INTERESTED_KEY, String(INITIAL_INTERESTED));
-      }
-      // optional: clean old key once
-      try { localStorage.removeItem('interestedCount'); } catch {}
-    } catch {}
+    let cancelled = false;
+    (async () => {
+      // Try server value first
+      try {
+        const res = await fetch(`${COUNTER_API}?action=get`, { cache: 'no-store' });
+        const text = await res.text();
+        const remoteVal = parseInt(text, 10);
+        if (!Number.isNaN(remoteVal) && Number.isFinite(remoteVal) && !cancelled) {
+          setInterestedCount(remoteVal);
+          try { localStorage.setItem(INTERESTED_KEY, String(remoteVal)); } catch {}
+          // clean old key once
+          try { localStorage.removeItem('interestedCount'); } catch {}
+          return;
+        }
+      } catch {}
+
+      // Fallback to local storage
+      try {
+        const saved = localStorage.getItem(INTERESTED_KEY);
+        if (saved !== null) {
+          const parsed = parseInt(saved, 10);
+          if (!Number.isNaN(parsed) && Number.isFinite(parsed) && !cancelled) setInterestedCount(parsed);
+        } else {
+          localStorage.setItem(INTERESTED_KEY, String(INITIAL_INTERESTED));
+        }
+        try { localStorage.removeItem('interestedCount'); } catch {}
+      } catch {}
+    })();
+    return () => { cancelled = true; };
   }, []);
 
-  const incrementInterested = () => {
+  const incrementInterested = async () => {
+    // Try to increment on server
+    try {
+      const res = await fetch(`${COUNTER_API}?action=inc&ts=${Date.now()}`, { cache: 'no-store' });
+      const text = await res.text();
+      const next = parseInt(text, 10);
+      if (!Number.isNaN(next) && Number.isFinite(next)) {
+        setInterestedCount(next);
+        try { localStorage.setItem(INTERESTED_KEY, String(next)); } catch {}
+        return;
+      }
+    } catch {}
+
+    // Fallback local increment
     setInterestedCount(prev => {
       const next = prev + 1;
       try { localStorage.setItem(INTERESTED_KEY, String(next)); } catch {}
@@ -318,7 +349,7 @@ export default function ApartmentListing() {
               <Phone className="w-5 h-5 ml-2" />
               התקשרו עכשיו
             </Button>
-            <Button variant="outline" size="lg" className="max-w-xs w-auto sm:flex-1 bg-green-50 border-green-200 text-green-700 hover:bg-green-100" onClick={() => { window.open('https://wa.me/972506920046', '_blank'); }}>
+            <Button variant="outline" size="lg" className="max-w-xs w-auto sm:flex-1 bg-green-50 border-green-200 text-green-700 hover:bg-green-100" onClick={handleWhatsAppClick}>
               <MessageCircle className="w-5 h-5 ml-2" />
               ווטסאפ
             </Button>
