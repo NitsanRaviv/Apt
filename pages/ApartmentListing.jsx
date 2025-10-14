@@ -41,14 +41,15 @@ export default function ApartmentListing() {
   };
 
   const INTERESTED_KEY = 'interestedCount_v2';
-  const COUNTER_API = 'https://script.google.com/macros/s/AKfycbxS87Zo9gVLNYKaFw0N9QyyaJKf5aQ8Xn1StCQKMB4Z47UKj1oxn0imQN6N54xpPvQz/exec';
+  const FALLBACK_INTERESTED = 25;
+  const COUNTER_API = 'https://script.google.com/macros/s/AKfycbwIdGjljksA6VqOLDakq-mf0i1O3IFwNdRLucprrMHsTcYWhlHhd0JYDVXnF7OSsQdY/exec';
   const [interestedCount, setInterestedCount] = useState(() => {
     try {
       const saved = localStorage.getItem(INTERESTED_KEY);
       const parsed = saved !== null ? parseInt(saved, 10) : NaN;
-      return Number.isFinite(parsed) ? parsed : 0;
+      return Number.isFinite(parsed) ? parsed : FALLBACK_INTERESTED;
     } catch {
-      return 0;
+      return FALLBACK_INTERESTED;
     }
   });
   const [isCountLoading, setIsCountLoading] = useState(true);
@@ -56,12 +57,16 @@ export default function ApartmentListing() {
   useEffect(() => {
     let cancelled = false;
     const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 1500);
+    const timeout = setTimeout(() => controller.abort(), 4500);
     (async () => {
       try {
         const res = await fetch(`${COUNTER_API}?action=get`, { cache: 'no-store', signal: controller.signal });
         const text = await res.text();
-        const remoteVal = parseInt(text, 10);
+        const parseNum = (s) => {
+          const n = parseInt(String(s).trim().replace(/[^0-9]/g, ''), 10);
+          return Number.isFinite(n) ? n : NaN;
+        };
+        const remoteVal = parseNum(text);
         if (!Number.isNaN(remoteVal) && Number.isFinite(remoteVal) && !cancelled) {
           setInterestedCount(remoteVal);
           try { localStorage.setItem(INTERESTED_KEY, String(remoteVal)); } catch {}
@@ -69,7 +74,14 @@ export default function ApartmentListing() {
         }
       } catch {}
       finally {
-        if (!cancelled) setIsCountLoading(false);
+        if (!cancelled) {
+          // Ensure we never show 0; fallback to 25 if nothing valid loaded
+          setInterestedCount(prev => {
+            const n = typeof prev === 'number' ? prev : NaN;
+            return !Number.isFinite(n) || n === 0 ? FALLBACK_INTERESTED : n;
+          });
+          setIsCountLoading(false);
+        }
       }
     })();
     return () => { cancelled = true; clearTimeout(timeout); controller.abort(); };
