@@ -57,7 +57,7 @@ export default function ApartmentListing() {
   useEffect(() => {
     let cancelled = false;
     const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 4500);
+    const timeout = setTimeout(() => controller.abort(), 10000);
     (async () => {
       try {
         const res = await fetch(`${COUNTER_API}?action=get`, { cache: 'no-store', signal: controller.signal });
