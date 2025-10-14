@@ -39,6 +39,34 @@ export default function ApartmentListing() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
+  const INITIAL_INTERESTED = 1;
+  const [interestedCount, setInterestedCount] = useState(INITIAL_INTERESTED);
+
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem('interestedCount');
+      if (saved !== null) {
+        const parsed = parseInt(saved, 10);
+        if (!Number.isNaN(parsed)) setInterestedCount(parsed);
+      } else {
+        localStorage.setItem('interestedCount', String(INITIAL_INTERESTED));
+      }
+    } catch {}
+  }, []);
+
+  const incrementInterested = () => {
+    setInterestedCount(prev => {
+      const next = prev + 1;
+      try { localStorage.setItem('interestedCount', String(next)); } catch {}
+      return next;
+    });
+  };
+
+  const handleWhatsAppClick = () => {
+    incrementInterested();
+    window.open('https://wa.me/972506920046', '_blank');
+  };
+
   const quickFacts = [
     { icon: "🏠", text: "5 חדרים" },
     { icon: "🏢", text: "קומה: 4/8 עם מעלית" },
@@ -94,7 +122,7 @@ export default function ApartmentListing() {
             {/* Social Proof Badge */}
             <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md rounded-full px-4 py-2 text-sm">
               <Eye className="w-4 h-4" />
-              <span>24 אנשים התעניינו השבוע</span>
+              <span>{interestedCount} אנשים התעניינו השבוע</span>
             </div>
 
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold leading-tight">
@@ -129,7 +157,7 @@ export default function ApartmentListing() {
               <Button 
                 size="lg" 
                 className="bg-green-600 hover:bg-green-700 text-white font-semibold text-lg px-8 py-4 rounded-xl shadow-2xl transition-all duration-300"
-                onClick={() => { window.open('https://wa.me/972506920046', '_blank'); }}
+                onClick={handleWhatsAppClick}
               >
                 <MessageCircle className="w-5 h-5 ml-2" />
                 ווטסאפ
@@ -166,7 +194,7 @@ export default function ApartmentListing() {
               {/* Pricing with Anchoring */}
               <Card className="p-8 bg-slate-50 border-2 border-slate-200">
                 <div className="text-center space-y-4">
-                  <h3 className="text-3xl font-bold text-slate-900">מחיר מבוקש: ₪2,700,000</h3>
+                  <h3 className="text-3xl font-bold text-slate-900">מחיר מבוקש: ₪2,750,000</h3>
                 </div>
               </Card>
             </div>
