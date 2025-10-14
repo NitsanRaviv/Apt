@@ -1,5 +1,6 @@
 
 import React, { useState, useEffect } from "react";
+import Head from 'next/head';
 import { Phone, MessageCircle, Mail, MapPin, Check, ChevronDown, ChevronUp, ArrowUp, Eye, Users, Clock, Download, Share2, Heart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -39,45 +40,50 @@ export default function ApartmentListing() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  const INITIAL_INTERESTED = 1;
   const INTERESTED_KEY = 'interestedCount_v2';
   const COUNTER_API = 'https://script.google.com/macros/s/AKfycbxS87Zo9gVLNYKaFw0N9QyyaJKf5aQ8Xn1StCQKMB4Z47UKj1oxn0imQN6N54xpPvQz/exec';
-  const [interestedCount, setInterestedCount] = useState(INITIAL_INTERESTED);
+  const [interestedCount, setInterestedCount] = useState(() => {
+    try {
+      const saved = localStorage.getItem(INTERESTED_KEY);
+      const parsed = saved !== null ? parseInt(saved, 10) : NaN;
+      return Number.isFinite(parsed) ? parsed : 0;
+    } catch {
+      return 0;
+    }
+  });
+  const [isCountLoading, setIsCountLoading] = useState(true);
 
   useEffect(() => {
     let cancelled = false;
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 1500);
     (async () => {
-      // Try server value first
       try {
-        const res = await fetch(`${COUNTER_API}?action=get`, { cache: 'no-store' });
+        const res = await fetch(`${COUNTER_API}?action=get`, { cache: 'no-store', signal: controller.signal });
         const text = await res.text();
         const remoteVal = parseInt(text, 10);
         if (!Number.isNaN(remoteVal) && Number.isFinite(remoteVal) && !cancelled) {
           setInterestedCount(remoteVal);
           try { localStorage.setItem(INTERESTED_KEY, String(remoteVal)); } catch {}
-          // clean old key once
           try { localStorage.removeItem('interestedCount'); } catch {}
-          return;
         }
       } catch {}
-
-      // Fallback to local storage
-      try {
-        const saved = localStorage.getItem(INTERESTED_KEY);
-        if (saved !== null) {
-          const parsed = parseInt(saved, 10);
-          if (!Number.isNaN(parsed) && Number.isFinite(parsed) && !cancelled) setInterestedCount(parsed);
-        } else {
-          localStorage.setItem(INTERESTED_KEY, String(INITIAL_INTERESTED));
-        }
-        try { localStorage.removeItem('interestedCount'); } catch {}
-      } catch {}
+      finally {
+        if (!cancelled) setIsCountLoading(false);
+      }
     })();
-    return () => { cancelled = true; };
+    return () => { cancelled = true; clearTimeout(timeout); controller.abort(); };
   }, []);
 
   const incrementInterested = async () => {
-    // Try to increment on server
+    // Optimistic update
+    setInterestedCount(prev => {
+      const base = typeof prev === 'number' ? prev : 0;
+      const next = base + 1;
+      try { localStorage.setItem(INTERESTED_KEY, String(next)); } catch {}
+      return next;
+    });
+    // Server update (override when returned)
     try {
       const res = await fetch(`${COUNTER_API}?action=inc&ts=${Date.now()}`, { cache: 'no-store' });
       const text = await res.text();
@@ -85,16 +91,8 @@ export default function ApartmentListing() {
       if (!Number.isNaN(next) && Number.isFinite(next)) {
         setInterestedCount(next);
         try { localStorage.setItem(INTERESTED_KEY, String(next)); } catch {}
-        return;
       }
     } catch {}
-
-    // Fallback local increment
-    setInterestedCount(prev => {
-      const next = prev + 1;
-      try { localStorage.setItem(INTERESTED_KEY, String(next)); } catch {}
-      return next;
-    });
   };
 
   const handleWhatsAppClick = () => {
@@ -157,7 +155,16 @@ export default function ApartmentListing() {
             {/* Social Proof Badge */}
             <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md rounded-full px-4 py-2 text-sm">
               <Eye className="w-4 h-4" />
-              <span>{interestedCount} אנשים התעניינו השבוע</span>
+              {isCountLoading ? (
+                <span className="inline-flex items-center">
+                  <svg className="animate-spin h-4 w-4 text-white" viewBox="0 0 24 24" aria-hidden="true">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
+                  </svg>
+                </span>
+              ) : (
+                <span>{interestedCount} אנשים התעניינו השבוע</span>
+              )}
             </div>
 
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold leading-tight">
