@@ -40,24 +40,28 @@ export default function ApartmentListing() {
   };
 
   const INITIAL_INTERESTED = 1;
+  const INTERESTED_KEY = 'interestedCount_v2';
   const [interestedCount, setInterestedCount] = useState(INITIAL_INTERESTED);
 
   useEffect(() => {
     try {
-      const saved = localStorage.getItem('interestedCount');
+      // reset by using a new versioned key
+      const saved = localStorage.getItem(INTERESTED_KEY);
       if (saved !== null) {
         const parsed = parseInt(saved, 10);
         if (!Number.isNaN(parsed)) setInterestedCount(parsed);
       } else {
-        localStorage.setItem('interestedCount', String(INITIAL_INTERESTED));
+        localStorage.setItem(INTERESTED_KEY, String(INITIAL_INTERESTED));
       }
+      // optional: clean old key once
+      try { localStorage.removeItem('interestedCount'); } catch {}
     } catch {}
   }, []);
 
   const incrementInterested = () => {
     setInterestedCount(prev => {
       const next = prev + 1;
-      try { localStorage.setItem('interestedCount', String(next)); } catch {}
+      try { localStorage.setItem(INTERESTED_KEY, String(next)); } catch {}
       return next;
     });
   };
