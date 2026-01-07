@@ -248,7 +248,7 @@ export default function ApartmentListing() {
               {/* Pricing with Anchoring */}
               <Card className="p-8 bg-slate-50 border-2 border-slate-200">
                 <div className="text-center space-y-4">
-                  <h3 className="text-3xl font-bold text-slate-900">מחיר מבוקש: ₪2,690,000</h3>
+                  <h3 className="text-3xl font-bold text-slate-900">מחיר מבוקש: ₪2,650,000</h3>
                 </div>
               </Card>
             </div>
